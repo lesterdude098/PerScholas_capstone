@@ -8,10 +8,7 @@ import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @Data
@@ -43,22 +40,43 @@ public class CustomerController {
 
     }
 
-    //bind to customer entity
-    @PostMapping("/customers")
-    public String saveStudent(@ModelAttribute("customer") Customer customer){
-        customerService.saveCustomer(customer);
+//has validation
+   @PostMapping(path = "/customers")
+    public String saveCustomer(@ModelAttribute("customer")@Valid Customer customer, BindingResult result) {
+        if (result.hasErrors()){
+            return "create_customer";
+        }
+        customerRepository.save(customer);
+        return "redirect:/customers";
+    }
+//edit customers from list
+    @GetMapping("/customer/edit/{id}")
+    public String editCustomerForm(@PathVariable Long id, Model model){
+    model.addAttribute("customer", customerService.getCustomerById(id));
+    return "edit_customer";
+    }
+
+    //handler for update
+    @PostMapping("/customers/{id}")
+    public String updateCustomer(@PathVariable Long id,
+        @ModelAttribute("customer") Customer customer, Model model){
+    //from database by ID
+        Customer currentCustomer = customerService.getCustomerById(id);
+        currentCustomer.setId(id);
+        currentCustomer.setFirstName(customer.getFirstName());
+        currentCustomer.setLastName(customer.getLastName());
+        currentCustomer.setEmail(customer.getEmail());
+
+        //save current customer
+        customerService.editCustomer(currentCustomer);
         return "redirect:/customers";
 
     }
 
-//    @PostMapping("/customers")
-//    public String saveStudent(@Valid Customer customer, BindingResult result, Model model){
-//        if (result.hasErrors()){
-//            return "customers/new";
-//        }
-//        customerRepository.save(customer);
-//        model.addAttribute("customers", customerRepository.findAll());
-//        return "customers";
-//    }
 
 }
+
+
+
+
+

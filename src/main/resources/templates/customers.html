@@ -35,6 +35,10 @@
                 <td th:text="${customer.firstName}"></td>
                 <td th:text="${customer.lastName}"></td>
                 <td th:text="${customer.email}"></td>
+<!--                @{/customer/edit/{id}(id=${student.id})}-->
+                <td>
+                    <a th:href="@{/customers/edit/{id}(id=${customer.id})}" class="btn btn-primary">Edit</a>
+                </td>
             </tr>
             </tbody>
         </table>

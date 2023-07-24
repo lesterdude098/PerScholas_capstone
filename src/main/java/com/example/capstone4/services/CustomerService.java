@@ -10,4 +10,6 @@ public interface CustomerService {
 
     Customer editCustomer(Customer customer);
     Customer getCustomerById(Long id);
+
+    void deleteCustomerById(Long Id);
 }

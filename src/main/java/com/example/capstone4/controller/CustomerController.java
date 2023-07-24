@@ -50,7 +50,7 @@ public class CustomerController {
         return "redirect:/customers";
     }
 //edit customers from list
-    @GetMapping("/customer/edit/{id}")
+    @GetMapping("/customers/edit/{id}")
     public String editCustomerForm(@PathVariable Long id, Model model){
     model.addAttribute("customer", customerService.getCustomerById(id));
     return "edit_customer";
@@ -69,6 +69,14 @@ public class CustomerController {
 
         //save current customer
         customerService.editCustomer(currentCustomer);
+        return "redirect:/customers";
+
+    }
+
+    //delete request
+    @GetMapping("/customers/{id}")
+    public String deleteCustomer(@PathVariable Long id){
+        customerService.deleteCustomerById(id);
         return "redirect:/customers";
 
     }

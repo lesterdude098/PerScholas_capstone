@@ -24,8 +24,6 @@
                 <th scope="col">First</th>
                 <th scope="col">Last</th>
                 <th scope="col">Email</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">End Date</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
@@ -35,9 +33,10 @@
                 <td th:text="${customer.firstName}"></td>
                 <td th:text="${customer.lastName}"></td>
                 <td th:text="${customer.email}"></td>
-<!--                @{/customer/edit/{id}(id=${student.id})}-->
+
                 <td>
                     <a th:href="@{/customers/edit/{id}(id=${customer.id})}" class="btn btn-primary">Edit</a>
+                    <a th:href="@{/customers/{id}(id=${customer.id})}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             </tbody>

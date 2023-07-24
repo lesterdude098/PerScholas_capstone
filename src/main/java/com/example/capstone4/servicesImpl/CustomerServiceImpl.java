@@ -3,8 +3,6 @@ package com.example.capstone4.servicesImpl;
 import com.example.capstone4.model.Customer;
 import com.example.capstone4.repository.CustomerRepository;
 import com.example.capstone4.services.CustomerService;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,5 +35,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer getCustomerById(Long id) {
         return customerRepository.findById(id).get();
+    }
+
+    @Override
+    public void deleteCustomerById(Long id) {
+        customerRepository.deleteById(id);
     }
 }

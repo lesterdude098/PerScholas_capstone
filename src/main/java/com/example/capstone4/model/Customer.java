@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,9 +36,24 @@ public class Customer {
     @Pattern(regexp ="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}", message = "Invalid Email format" )
     private String email;
 
+//    @ManyToMany
+//    @JoinTable(name="customer_project",
+//        joinColumns = {@JoinColumn(name = "customer_id", referencedColumnName = "id")},
+//            inverseJoinColumns = {@JoinColumn(name = "project_id", referencedColumnName = "id")})
+
+    //one customer with many projects
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    public List<Project> projects = new ArrayList<>();
+
+
+
+
     public Customer(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
+
+
 }

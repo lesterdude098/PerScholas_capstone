@@ -56,7 +56,7 @@ public class CustomerController {
     return "edit_customer";
     }
 
-    //handler for update
+    //handler for update customer
     @PostMapping("/customers/{id}")
     public String updateCustomer(@PathVariable Long id,
         @ModelAttribute("customer") Customer customer, Model model){

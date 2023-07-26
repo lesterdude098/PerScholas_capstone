@@ -17,7 +17,6 @@ import com.example.capstone4.services.UserEntityService;
 import java.util.List;
 
 @Service
-
 public class UserEntityServiceImpl implements UserEntityService {
     private UserEntityRepo userEntityRepo;
     private RoleRepository roleRepository;
